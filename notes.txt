@@ -1,0 +1,11 @@
+https://api.github.com/gists/public		//page one of gists
+https://api.github.com/gists/public?page=1	//page one of gists
+
+//need to be desiplayed on screen
+gists.description	-description
+gists.html_url		-html_url		//as link of description
+
+//language filters
+gists.files.<filename>.language
+
+//border-radius
