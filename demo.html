@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Local Storage and Ajax Demo</title>
+  <script src="demo.js"></script>
+</head>
+<body>
+  <div id="output">
+  <section>
+    <h5>Create a New Sport</h5>
+    <div>
+      <label>Name</label>
+      <input type="text" name="sport-name">
+    </div>
+    <div>
+      <label>Minimum Temp</label>
+      <input type="number" name="sport-min-temp">
+    </div>
+    <div>
+      <label>Maximum Temp</label>
+      <input type="number" name="sport-max-temp">
+    </div>
+    <div>
+      <label>Rain Acceptable</label>
+      <input type="checkbox" name="sport-rain-ok">
+    </div>
+    <div>
+      <input type="button" value="Save Sport" onclick="saveSport()">
+    </div>
+  </section>
+  <section>
+    <h5>City Selection</h5>
+    <select name="city-select">
+      <option value="Salem,Or">Salem</option>
+      <option value="Corvallis,Or">Corvallis</option>
+    </select>
+  </section>
+  <section>
+    <ul id="sport-list">
+    </ul>
+  </section>
+  </div>
+</body>
+</html>

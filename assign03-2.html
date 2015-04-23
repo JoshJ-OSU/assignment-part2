@@ -1,7 +1,50 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <script type="text/javascript" src="javascript.js"></script>
-  </head>
-
+<head>
+  <meta charset="utf-8">
+  <script type="text/javascript" src="javascript.js"></script>
+</head>
+<body>
+  <div id="output">
+  <section title="search-options" style="border:solid;border-radius:20px;padding:25px">
+    <h3>Search Options</h3>
+    <div>
+      <label>Pages</label>
+      <input type="number" name="number-of-pages"></input>
+      </select>
+    </div>
+    <div id="Filter Languages">
+      <h5>Filter Languages</h5>
+      <div>
+        <input type="checkbox" name="lfilter-python"></input>
+        <label>Python</label>
+      </div>
+      <div>
+        <input type="checkbox" name="lfilter-json"></input>
+        <label>JSON</label>
+      </div>
+      <div>
+        <input type="checkbox" name="lfilter-javascript"></input>
+        <label>JavaScript</label>
+      </div>
+      <div>
+        <input type="checkbox" name="lfilter-sql"></input>
+        <label>SQL</label>
+      </div> 
+    </div>
+    <br></br>
+    <div>
+      <input type="button" value="Search Gists" onclick="initiateSearch()"></input>
+    </div>
+    <div id="error-message">
+    </div>
+  </section>
+  <section title="favorites">
+    <h3>Favorites</h3>
+  </section>
+  <section title="search-results">
+    <h3>Search Results</h3>
+  </section>
+  </div>
+</body>
 </html>

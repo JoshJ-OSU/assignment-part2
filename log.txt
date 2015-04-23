@@ -1,0 +1,14 @@
+Start: Wed, 22 Apr 2015 13:30:00 -0700
+End: Wed, 22 Apr 2015 19:00:00 -0700
+Tasks: Attempted to figure out github's API (took a lot of time to interpret, not intuitive for newbies like me!).  Started an outline of data input/output and objects needed for javascript.  Created the HTML shell to contain finished product.  Attempted to write code for ajax using lecture material as a reference.  Will probably have to scrap initial draft when I figure out the rest of the javascript structure.
+
+Start: Wed, 22 Apr 2015 08:30:00 -0700
+End: Wed, 22 Apr 2015 12:00:00 -0700
+Tasks: Typed up code from video.  Studied how it worked and operated.  Looked up information about ajax.
+
+Start: Tue, 21 Apr 2015 10:00:00 -0700
+End: Tue, 21 Apr 2015 15:00:00 -0700
+Tasks: Reveiwed videos, read documentation, read piazza, pondered the assignment
+
+
+
