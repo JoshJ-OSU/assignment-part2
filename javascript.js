@@ -12,12 +12,13 @@ function initiateSearch() {
   }
   
   //output to html
-  
+  printGists(myGists);
 }
 
-function Gist(description,http_url,fileLanguages) {
+function Gist(id,description,html_url,fileLanguages) {
+  this.id = id
   this.description = description;
-  this.http_url = http_url;
+  this.html_url = html_url;
   this.fileLanguages = fileLanguages;
   this.containsLanguage = function(l) {
     var result = false;
@@ -39,7 +40,8 @@ function getGists(page){
   if(!req){
     throw 'Unable to create HttpRequest.';
   }
-  var url = 'https://api.github.com/gists/public';
+  //var url = 'https://api.github.com/gists/public';
+  var url = 'http://web.engr.oregonstate.edu/~johnsjo3/CS290/assign3p2/localGists';
     req.onreadystatechange = function(){
       if(this.readyState === 4){
         //var gists stores parsed response text
@@ -47,6 +49,7 @@ function getGists(page){
         
         
         parsedGistPage.forEach(function(s){
+          var id = s.id;
           var html_url = s.html_url;
           var description = s.description;
           var fileLanguages = [];
@@ -61,7 +64,7 @@ function getGists(page){
             }
           }
           
-          gists.push(new Gist(description,html_url,fileLanguages));
+          gists.push(new Gist(id,description,html_url,fileLanguages));
         });
         
         addGist(gists);
@@ -74,7 +77,7 @@ function getGists(page){
   //                      maxt, mint, rain);
   //  }
   //};
-  req.open('GET', url + '?page=' + (page));
+  req.open('GET', url )// + '?page=' + (page));
   req.send();
   
   return gists;
@@ -83,9 +86,41 @@ function getGists(page){
 function addGist(g) {
   myGists = myGists.concat(g);
 }
-/*
+
+
 function printGists(arr){
-  arr.forEach(function(s){
+  var tblBody = document.getElementById('search-gist-results');
+  arr.forEach(function(s) {
+    var row = document.createElement('tr');
+    row.setAttribute("id", s.id)
+    
+    //button
+    var cell1 = document.createElement('td');
+    cell1.innerHTML = "<input type=\'button\' value=\'" + s.id + " onclick=\'fave(\\\"" + s.id + "\\\")></input>"
+    
+    //description and html link
+    var cell2 = document.createElement('td');
+    cell2.innerHTML = "<a href=\'" + s.html_url + "\'>" + s.description + "</a>";
+    
+    //bulleted list of languages
+    var cell3 = document.createElement('td');
+    var ul = document.createElement('ul');
+    s.fileLanguages.forEach(function(l){
+      var bullet = document.createElement('li');
+      bullet.innerText = l;
+      ul.appendChild(bullet);
+    });
+    cell3.appendChild(ul);
+    
+    row.appendChild(cell1);
+    row.appendChild(cell2);
+    row.appendChild(cell3);
+    
+    tblBody.appendChild(row);
     
   });
-}*/
+}
+
+function fave(id) {
+  console.log(id);
+}
