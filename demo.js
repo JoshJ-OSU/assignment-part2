@@ -1,7 +1,7 @@
 var settings = null;
 
  /* Begin sport section */
- 
+
 function Sport(sName, minTemp, maxTemp, rainOK) {
   this.sName = sName;
   this.minTemp = minTemp;
@@ -10,7 +10,7 @@ function Sport(sName, minTemp, maxTemp, rainOK) {
 }
 
 function addSport(settings, sport) {
-  if(sport instanceof Sport) {
+  if (sport instanceof Sport) {
     settings.sports.push(sport);
     localStorage.setItem('userSettings', JSON.stringify(settings));
     return true;

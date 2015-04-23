@@ -1,3 +1,7 @@
+Start: Thu, 23 Apr 2015 08:30:00 -0700
+End: Thu, 23 Apr 2015 12:40:00 -0700
+Tasks: Got the parse function to work in javascript.  Stores values in array of Gist objects.  Small modifications to html code - created table head and body in results sections.  Added style.css to make the page a tad more interesting visually.  Very basic css formatting.    
+
 Start: Wed, 22 Apr 2015 13:30:00 -0700
 End: Wed, 22 Apr 2015 19:00:00 -0700
 Tasks: Attempted to figure out github's API (took a lot of time to interpret, not intuitive for newbies like me!).  Started an outline of data input/output and objects needed for javascript.  Created the HTML shell to contain finished product.  Attempted to write code for ajax using lecture material as a reference.  Will probably have to scrap initial draft when I figure out the rest of the javascript structure.

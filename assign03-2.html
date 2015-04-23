@@ -3,14 +3,15 @@
 <head>
   <meta charset="utf-8">
   <script type="text/javascript" src="javascript.js"></script>
+  <link href="style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
   <div id="output">
-  <section title="search-options" style="border:solid;border-radius:20px;padding:25px">
+  <section title="search-options">
     <h3>Search Options</h3>
     <div>
       <label>Pages</label>
-      <input type="number" name="number-of-pages"></input>
+      <input type="number" name="number-of-pages" value="2"></input>
       </select>
     </div>
     <div id="Filter Languages">
@@ -39,11 +40,31 @@
     <div id="error-message">
     </div>
   </section>
-  <section title="favorites">
+  <section>
     <h3>Favorites</h3>
+    <table>
+      <thead>
+        <tr>
+        <th></th>
+        <th>Description</th>
+        <th>Language</thead>
+        </tr>
+      </thead>
+      <tbody id="favorite-gists">
+      </tbody>
+    </table>
   </section>
-  <section title="search-results">
+  <section>
     <h3>Search Results</h3>
+    <table>
+      <thead>
+        <th></th>
+        <th>Description</th>
+        <th>Language</th>
+      </thead>
+      <tbody id="search-gist-results">
+      </tbody>
+    </table>
   </section>
   </div>
 </body>
