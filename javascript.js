@@ -1,18 +1,41 @@
-/*jslint browser:true */
+/** 
+ *  @fileoverview Asks github.com for recent gists, formats, and stores them.
+ *  @author johnsjo3@onid.oregonstate.edu (Josh Johnson)
+ */
 
+/**
+ *  MIN_PAGES and MAX_PAGES define limits upon user for pages to request
+ */
 var MIN_PAGES = 1;
 var MAX_PAGES = 5;
 
-var favGists = [];   //favorite gists (stored in localStorage)
-var resultGists = []; //stores results after calling fetchGists
+/**
+ *  storage of gist objects
+ */
+var favGists = [];      //favorite gists (stored in localStorage)
+var resultGists = [];   //stores results after calling fetchGists
 
 
-//Gist object
+/**
+ *  Constructor for object Gist
+ *  @param {string} id  - unique id of gist
+ *  @param {string} description - The description of the gist
+ *  @param {string} html_url - links to gist's webpage
+ *  @param {Array.<string>} fileLanguages - all of the languages used by gist
+ *  @constructor
+ */
 function Gist(id, description, html_url, fileLanguages) {
   this.id = id;
   this.description = description;
   this.html_url = html_url;
   this.fileLanguages = fileLanguages;
+
+  /**
+   *  function returns if the passed in language is contained in fileLanguages
+   *  @param {string} l - the language to check against
+   *  @return {boolean} - true if l matches a language stored in fileLanguages
+   *      false if l does not.  NOTE that the search is case sensitive.
+   */
   this.containsLanguage = function (l) {
     var result = false;
     fileLanguages.forEach(function (s) {
@@ -25,7 +48,11 @@ function Gist(id, description, html_url, fileLanguages) {
 }
 
 
-//prints the passed gist object to screen
+/**
+ *  Formats the properties of passed gist object and appends them to the
+ *      result table on the html page.
+ *  @param {project.Gist}
+ */
 function printResultGist(g) {
   var tblBody = document.getElementById('search-gist-results');
   var row = document.createElement('tr');
@@ -65,7 +92,11 @@ function printResultGist(g) {
 }
 
 
-//prints passed gist object to screen
+/**
+ *  Formats the properties of passed gist object and appends them to the
+ *      favorites table on the html page.
+ *  @param {project.Gist}
+ */
 function printFavGist(g) {
   var tblBody = document.getElementById('favorite-gists');
   var row = document.createElement('tr');
@@ -105,8 +136,12 @@ function printFavGist(g) {
 }
 
 
-
-//adds a passed gist to the resultGists array and prints to html page
+/**
+ *  Adds a passed gist to the resultGists array and prints to html page
+ *    A Gist object cannot already be in either favGists or resultGists.
+ *    If it is, it will be rejected.  This is done by comparing Gist.id
+ *  @param {project.Gist} - The Gist object to add and print to results
+ */
 function addResultGist(g) {
   //make sure gist is not already in favorites
   var inFavs = false;
@@ -128,14 +163,24 @@ function addResultGist(g) {
 }
 
 
-//removes index from array and removes corresponding element from html page
+/**
+ * Removes resultGists[index] from resultGists.  When removed elements to the 
+ * right of index shift one space to left to fill gap in array. 
+ * @param {integer} index - Index of favGist to remove
+ */
 function removeResultGist(index) {
   //removes element from array
   resultGists.splice(index, 1);
 }
 
 
-//adds to favGists, updates localStorage, and prints to screen
+/**
+ *  Adds a passed gist to the favGists array and prints to html page.
+ *    LocalStorage is updated.
+ *    A Gist object cannot already be in either favGists or resultGists.
+ *    If it is, it will be rejected.  This is done by comparing Gist.id
+ *  @param {project.Gist} - The Gist object to add and print to results
+ */
 function addFavGist(g) {
   //make sure gist is not already in favorites
   var inFavs = false;
@@ -160,19 +205,25 @@ function addFavGist(g) {
 }
 
 
-//removes from favGists, updates localStorage
+/**
+ * Removes favGists[index] from favGists and updates localStorage.  When removed
+ *    elements to the right of index shift one space to left to fill gap in
+ *    array. 
+ * @param {integer} index - Index of favGist to remove
+ */
 function removeFavGist(index) {
-  //removes element from array
+  //removes element from array.
   favGists.splice(index, 1);
   //update localStorage
   localStorage.setItem('favGists-storage', JSON.stringify(favGists));
 }
 
 
-
-
-
-//moves gist from results to fav section
+/**
+ * Moves gist from results to favorites section.  Updates arrays accordingly.
+ *    @param {string} id - corresponds to Gist.id found in resultGists.
+ *        This must match.  Operations performed on parent gist object.
+ */
 function moveGistToFav(id) {
   //remove element from page
   var fromTbl = document.getElementById('search-gist-results');
@@ -195,7 +246,11 @@ function moveGistToFav(id) {
 }
 
 
-//moves gist from fav section to results section
+/**
+ * Moves gist from favorites to results section.  Updates arrays accordingly.
+ *    @param {string} id - corresponds to Gist.id found in favGists.
+ *        This must match.  Operations performed on parent gist object.
+ */
 function moveGistToResult(id) {
   //remove element from page
   var fromTbl = document.getElementById('favorite-gists');
@@ -218,6 +273,13 @@ function moveGistToResult(id) {
 }
 
 
+/**
+ * Requests gists via XMLHttpRequest.  Parses retrieved JSON. Applies filters
+ *    based on settings provided by user on html page.  Then adds the resulting
+ *    gists to resultGists.  resultGists is cleared in this operation as is
+ *    the results section on the webpage. 
+ * @param {number} page - the page number to retrieve from github.
+ */
 function getGists(page) {
   //clear results off page
   var gid;
@@ -311,7 +373,10 @@ function getGists(page) {
 }
 
 
-//Called from html, calls AJAX function getGists and loads resultGists 
+/**
+ * Error check user's page input, then submits requests for gists by calling
+ *    getGists(page)
+ */
 function initiateSearch() {
   //loop calls for gists, parses them, and pushes them to the array results
   var pages = document.getElementsByName('number-of-pages')[0].value;
@@ -332,7 +397,9 @@ function initiateSearch() {
 }
 
 
-//Loads user favorites on load
+/**
+ *  Loads the user's favorite gists from LocalStorage if present.
+ */
 window.onload = function () {
   var favStr = localStorage.getItem('favGists-storage');
   if (favStr === null) {
