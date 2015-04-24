@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
+  <title>Assignment 3 Part 2</title>
   <script type="text/javascript" src="javascript.js"></script>
   <link href="style.css" rel="stylesheet" type="text/css">
 </head>
@@ -11,34 +12,30 @@
     <h3>Search Options</h3>
     <div>
       <label>Pages</label>
-      <input type="number" name="number-of-pages" value="1"></input>
-      </select>
+      <input type="number" name="number-of-pages" value="1">
     </div>
-    <div id="Filter Languages">
+    <div>
       <h5>Filter Languages</h5>
       <div>
-        <input type="checkbox" name="lfilter-python"></input>
+        <input type="checkbox" name="lfilter-python">
         <label>Python</label>
       </div>
       <div>
-        <input type="checkbox" name="lfilter-json"></input>
+        <input type="checkbox" name="lfilter-json">
         <label>JSON</label>
       </div>
       <div>
-        <input type="checkbox" name="lfilter-javascript"></input>
+        <input type="checkbox" name="lfilter-javascript">
         <label>JavaScript</label>
       </div>
       <div>
-        <input type="checkbox" name="lfilter-sql"></input>
+        <input type="checkbox" name="lfilter-sql">
         <label>SQL</label>
       </div> 
     </div>
-    <br></br>
+    <br>
     <div>
-      <input type="button" value="Search Gists" onclick="initiateSearch()"></input>
-    </div>
-    <div>
-      <input type="button" value="Print Gists" onclick="printGists(myGists)"></input>
+      <input type="button" value="Search Gists" onclick="initiateSearch()">
     </div>
     <div id="error-message">
     </div>
@@ -48,10 +45,9 @@
     <table>
       <thead>
         <tr>
-        <th></th>
-        <th>Description</th>
-        <th>Language(s)</thead>
-        </tr>
+          <th></th>
+          <th>Description</th>
+          <th>Language(s)
       </thead>
       <tbody id="favorite-gists">
       </tbody>
@@ -61,9 +57,10 @@
     <h3>Search Results</h3>
     <table>
       <thead>
-        <th></th>
-        <th>Description</th>
-        <th>Language(s)</th>
+        <tr>
+          <th></th>
+          <th>Description</th>
+          <th>Language(s)</th>
       </thead>
       <tbody id="search-gist-results">
       </tbody>
