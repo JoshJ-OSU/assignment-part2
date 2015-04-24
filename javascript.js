@@ -35,22 +35,63 @@ function Gist(id,description,html_url,fileLanguages) {
         result = true;
       }
     });
+    return result;
   };
 }
 
+/*
+function lFilter() = {
+  this->python = document.getElementById('lfilter-python').checked;
+  json : document.getElementById('lfilter-json').checked;
+  js : document.getElementById('lfilter-javascript').checked;
+  sql : document.getElementById('lfilter-sql').checked;
+  unchecked : function(){
+    if (!python && !json && !js && !sql) {
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
+};
+*/
 
 /* Requests gists from github.  The following parameters are used:
   URL
 */
 function getGists(page){
-  var parsedGistPage;
-  var gists = [];
+  //clear results off page
+  while (resultGists.length > 0){
+    var id = resultGists[0].id;
+    var fromTbl = document.getElementById('search-gist-results');
+    var rowToRemove = document.getElementById(id);
+    fromTbl.removeChild(rowToRemove);
+    removeResultGist(0);
+  }
+  
+  //get filters from html page
+  var lFilter = [];
+  if (document.getElementsByName('lfilter-python')[0].checked === true){
+    lFilter.push("Python");
+  }
+  if (document.getElementsByName('lfilter-json')[0].checked === true){
+    lFilter.push("JSON");
+  }
+  if (document.getElementsByName('lfilter-javascript')[0].checked === true){
+    lFilter.push("JavaScript");
+  }
+  if (document.getElementsByName('lfilter-sql')[0].checked === true){
+    lFilter.push("SQL");
+  }  
+  
+  //create request
   var req = new XMLHttpRequest();
   if(!req){
     throw 'Unable to create HttpRequest.';
   }
-  //var url = 'https://api.github.com/gists/public'; // change page code below too!
-  var url = 'http://web.engr.oregonstate.edu/~johnsjo3/CS290/assign3p2/localGists';
+  var url = 'https://api.github.com/gists/public';
+  //used in debugging
+  //var url = 'http://web.engr.oregonstate.edu/~johnsjo3/CS290/assign3p2/localGists';
     req.onreadystatechange = function(){
       if(this.readyState === 4){
         //var gists stores parsed response text
@@ -60,6 +101,10 @@ function getGists(page){
           var id = s.id;
           var html_url = s.html_url;
           var description = s.description;
+          if (description.length === 0){
+            description = "No Description"
+          }
+          
           var fileLanguages = [];
           
           //adapted from instructor's code (Piazza @180)
@@ -71,12 +116,26 @@ function getGists(page){
               }
             }
           }
+          
           newGist = new Gist(id,description,html_url,fileLanguages);
-          addResultGist(newGist);
+          var passTest = false;
+          if(lFilter.length === 0) {
+            passTest = true;
+          }
+          else {
+            lFilter.forEach(function(f){
+              if (newGist.containsLanguage(f) === true) {
+                passTest = true;
+              }
+            });
+          }
+          if (passTest === true) {
+            addResultGist(newGist);
+          }
         });
       }
     }
-  req.open('GET', url )// + '?page=' + (page));
+  req.open('GET', url  + '?page=' + (page));
   req.send();
 }
 
@@ -146,7 +205,7 @@ function printResultGist(g){
   var cell1 = document.createElement('td');
   var button = document.createElement('input');
   button.setAttribute("type","button")
-  button.setAttribute("value", g.id);
+  button.setAttribute("value", "Move to Favorites");
   button.setAttribute("onclick","moveGistToFav('" + g.id + "')");
   cell1.appendChild(button);
   
@@ -180,7 +239,7 @@ function printFavGist(g){
   var cell1 = document.createElement('td');
   var button = document.createElement('input');
   button.setAttribute("type","button")
-  button.setAttribute("value", g.id);
+  button.setAttribute("value", "Remove");
   button.setAttribute("onclick","moveGistToResult('" + g.id + "')");
   cell1.appendChild(button);
   

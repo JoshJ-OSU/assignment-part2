@@ -4,11 +4,23 @@ section {
 	padding: 25px; 
 	margin: 5px;
 }
-
-table, th, td {border-style: solid; border-width: thin; border-color:gray}
+td {
+	padding-left: 5px; 
+	padding-right: 5px;
+	border-style: solid;
+	border-width: thin;
+	border-color:gray
+}
+table, th {
+	border-style: solid;
+	border-width: thin;
+	border-color:gray;
+	border-collapse: collapse
+}
 thead {background-color: transparent; text-align: center; font-weight: bold}
 tbody > tr:nth-child(odd) {background-color:lightgreen}
 tbody > tr:nth-child(even) {background-color:lightblue}
+td {}
 
 #error-message {
 	color: red; font-weight: bold
