@@ -1,5 +1,9 @@
-Start: Thu, 23 Apr 2015 1:40:00 -0700
-End: Thu, 23 Apr 2015 5:26:00 -0700
+Start: Thu, 23 Apr 2015 19:00:00 -0700
+End: Fri, 24 Apr 2015 01:48:00 -0700
+Tasks: Req Error Handling completed. Finished movement functionality between favorites and results.  Finished filtering. Cleaned up code.  Passed code through jslint and w3c checkers. Formatted code comments to meet Google style standards... i think.
+
+Start: Thu, 23 Apr 2015 13:40:00 -0700
+End: Thu, 23 Apr 2015 17:26:00 -0700
 Tasks: Cloned (moved) git repo to orst engr server to support CORS local file testing.  Editing via ftp.  Gist object post appropriately to results section of html with button, linked description, and bulleted list of languages.  currently working on error-handling of pages input.
 
 Start: Thu, 23 Apr 2015 08:30:00 -0700
