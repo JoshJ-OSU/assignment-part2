@@ -71,7 +71,7 @@ function printResultGist(g) {
   var link = document.createElement('a');
   link.setAttribute("href", g.html_url);
   link.setAttribute("target", "_blank");
-  link.innerText = g.description;
+  link.textContent = g.description;
   cell2.appendChild(link);
 
   //bulleted list of languages
@@ -79,7 +79,7 @@ function printResultGist(g) {
   var ul = document.createElement('ul');
   g.fileLanguages.forEach(function (l) {
     var bullet = document.createElement('li');
-    bullet.innerText = l;
+    bullet.textContent = l;
     ul.appendChild(bullet);
   });
   cell3.appendChild(ul);
@@ -115,7 +115,7 @@ function printFavGist(g) {
   var link = document.createElement('a');
   link.setAttribute("href", g.html_url);
   link.setAttribute("target", "_blank");
-  link.innerText = g.description;
+  link.textContent = g.description;
   cell2.appendChild(link);
 
   //bulleted list of languages
@@ -123,7 +123,7 @@ function printFavGist(g) {
   var ul = document.createElement('ul');
   g.fileLanguages.forEach(function (l) {
     var bullet = document.createElement('li');
-    bullet.innerText = l;
+    bullet.textContent = l;
     ul.appendChild(bullet);
   });
   cell3.appendChild(ul);
@@ -383,9 +383,9 @@ function initiateSearch() {
   if ((pages < MIN_PAGES) || (pages > MAX_PAGES)) {
     var str = "";
     str = "You must select from " + MIN_PAGES + " to " + MAX_PAGES + " pages.";
-    document.getElementById('error-message').innerText = str;
+    document.getElementById('error-message').textContent = str;
   } else {
-    document.getElementById('error-message').innerText = "";
+    document.getElementById('error-message').textContent = "";
 
     var i;
     var page;
