@@ -1,13 +1,15 @@
 section {
 	border: solid;
 	border-radius: 20px; 
-	padding-left: 25px; 
-	padding-bottom: 5px;
+	padding: 25px; 
 	margin: 5px;
-	width: 640px
 }
 
 table, th, td {border-style: solid; border-width: thin; border-color:gray}
 thead {background-color: transparent; text-align: center; font-weight: bold}
 tbody > tr:nth-child(odd) {background-color:lightgreen}
 tbody > tr:nth-child(even) {background-color:lightblue}
+
+#error-message {
+	color: red; font-weight: bold
+}

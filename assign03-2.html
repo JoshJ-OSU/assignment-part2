@@ -11,7 +11,7 @@
     <h3>Search Options</h3>
     <div>
       <label>Pages</label>
-      <input type="number" name="number-of-pages" value="2"></input>
+      <input type="number" name="number-of-pages" value="1"></input>
       </select>
     </div>
     <div id="Filter Languages">
@@ -36,6 +36,9 @@
     <br></br>
     <div>
       <input type="button" value="Search Gists" onclick="initiateSearch()"></input>
+    </div>
+    <div>
+      <input type="button" value="Print Gists" onclick="printGists(myGists)"></input>
     </div>
     <div id="error-message">
     </div>

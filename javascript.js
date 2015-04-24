@@ -1,3 +1,6 @@
+var MIN_PAGES = 1;
+var MAX_PAGES = 5;
+
 var results = [];     //array of gist objects
 var favorites = [];   //favorite gists (stored in localStorage)
 var myGists = [];
@@ -6,13 +9,17 @@ var myGists = [];
 function initiateSearch() {  
   //loop calls for gists, parses them, and pushes them to the array results
   var pages = document.getElementsByName('number-of-pages')[0].value;
-  for (var i = 0; i < pages; i++) {
-    var page = i+1;
-    getGists(page);
+  if ((pages < MIN_PAGES) || (pages > MAX_PAGES)) {
+    var str = "You must select from " + MIN_PAGES + " to " + MAX_PAGES " pages";
+    document.getElementById('error-message').value = str;
   }
-  
-  //output to html
-  printGists(myGists);
+  else {
+    document.getElementById('error-message').value = "";
+    for (var i = 0; i < pages; i++) {
+      var page = i+1;
+      getGists(page);
+    }
+  }
 }
 
 function Gist(id,description,html_url,fileLanguages) {
@@ -96,7 +103,12 @@ function printGists(arr){
     
     //button
     var cell1 = document.createElement('td');
-    cell1.innerHTML = "<input type=\'button\' value=\'" + s.id + " onclick=\'fave(\\\"" + s.id + "\\\")></input>"
+    //cell1.innerHTML = "<input type=\'button\' value=\'" + s.id + "\' onclick=\'fave(\"" + s.id + "\")></input>"
+    var button = document.createElement('input');
+    button.setAttribute("type","button")
+    button.setAttribute("value", s.id);
+    button.setAttribute("onclick","faveGist('" + s.id + "')");
+    cell1.appendChild(button);
     
     //description and html link
     var cell2 = document.createElement('td');
@@ -121,6 +133,6 @@ function printGists(arr){
   });
 }
 
-function fave(id) {
+function faveGist(id) {
   console.log(id);
 }
